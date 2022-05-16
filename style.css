@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(27, 27, 27);
+  color: rgb(200, 200, 200);
+}
+.input-num {
+  width: 50px;
+}
+.input-num,
+.input-text,
+.btn {
+  background-color: rgb(42, 42, 42);
+}
+.btn {
+  color: rgb(200, 200, 200);
+}
