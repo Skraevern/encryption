@@ -4,13 +4,14 @@ body {
 }
 .input-num {
   width: 100px;
-  color: rgb(200, 200, 200);
 }
 .input-num,
 .input-text,
 .btn {
   background-color: rgb(42, 42, 42);
 }
-.btn {
+.btn,
+.input-num,
+.input-text {
   color: rgb(200, 200, 200);
 }
