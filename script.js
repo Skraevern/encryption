@@ -1,5 +1,6 @@
 const clearBtn = document.getElementById("clear-btn");
 const encryptionBtn = document.getElementById("encryption-btn");
+const decryptionBtn = document.getElementById("decryption-btn");
 let encryptionKey = document.getElementById("encryption-key");
 let plainTextInput = document.getElementById("plaintext");
 let decryptionKey = document.getElementById("decryption-key");
@@ -13,7 +14,9 @@ const clear = () => {
   encryptedTextInput.value = "";
   encryptionString = "";
   textString = "";
-  encryption = 0;
+  clearMemory();
+};
+const clearMemory = () => {
   encryptedText = "";
 };
 
@@ -31,7 +34,26 @@ const encrypt = () => {
     encryptedText += String.fromCharCode(encryption);
   }
   encryptedTextInput.value = encryptedText;
+  clearMemory();
+};
+
+const decrypt = () => {
+  encryptionString = decryptionKey.value;
+  textString = encryptedTextInput.value;
+
+  for (let i = 0; i < textString.length; i++) {
+    encryption = textString[i].charCodeAt(0) - Number(encryptionString);
+    if (encryption < 32) {
+      for (let i = 0; encryption < 32; i++) {
+        encryption += 95;
+      }
+    }
+    encryptedText += String.fromCharCode(encryption);
+  }
+  plainTextInput.value = encryptedText;
+  clearMemory();
 };
 
 clearBtn.onclick = () => clear();
 encryptionBtn.onclick = () => encrypt();
+decryptionBtn.onclick = () => decrypt();
