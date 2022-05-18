@@ -6,7 +6,7 @@ let plainTextInput = document.getElementById("plaintext");
 let decryptionKey = document.getElementById("decryption-key");
 let encryptedTextInput = document.getElementById("encrypted-text");
 let encryptedText = "";
-let encryption;
+let encryption = 0;
 
 const clear = () => {
   encryptionKey.value = "";
@@ -18,6 +18,7 @@ const clear = () => {
 };
 const clearMemory = () => {
   encryptedText = "";
+  encryption = 0;
 };
 
 const encrypt = () => {
@@ -25,10 +26,13 @@ const encrypt = () => {
   textString = plainTextInput.value;
 
   for (let i = 0; i < textString.length; i++) {
-    encryption = textString[i].charCodeAt(0) + Number(encryptionString);
-    if (encryption > 126) {
-      for (let i = 0; encryption > 126; i++) {
-        encryption -= 95;
+    encryption = textString[i].charCodeAt(0);
+    for (let index = 0; index < encryptionString.length; index++) {
+      encryption += Number(encryptionString[index]);
+      if (encryption > 126) {
+        for (let i = 0; encryption > 126; i++) {
+          encryption -= 95;
+        }
       }
     }
     encryptedText += String.fromCharCode(encryption);
