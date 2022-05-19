@@ -23,39 +23,39 @@ const clearMemory = () => {
 };
 
 const encrypt = () => {
-  encryptionString = encryptionKey.value;
-  textString = plainTextInput.value;
-
+  if (addEncryption) {
+    encryptionString = encryptionKey.value;
+    textString = plainTextInput.value;
+  } else if (!addEncryption) {
+    encryptionString = decryptionKey.value;
+    textString = encryptedTextInput.value;
+  }
   for (let i = 0; i < textString.length; i++) {
     encryption = textString[i].charCodeAt(0);
     for (let index = 0; index < encryptionString.length; index++) {
-      encryption += Number(encryptionString[index]);
-      if (encryption > 126) {
-        for (let i = 0; encryption > 126; i++) {
-          encryption -= 95;
+      if (addEncryption) {
+        encryption += Number(encryptionString[index]);
+        if (encryption > 126) {
+          for (let i = 0; encryption > 126; i++) {
+            encryption -= 95;
+          }
+        }
+      } else if (!addEncryption) {
+        encryption -= Number(encryptionString[index]);
+        if (encryption < 32) {
+          for (let i = 0; encryption < 32; i++) {
+            encryption += 95;
+          }
         }
       }
     }
     encryptedText += String.fromCharCode(encryption);
   }
-  encryptedTextInput.value = encryptedText;
-  clearMemory();
-};
-
-const decrypt = () => {
-  encryptionString = decryptionKey.value;
-  textString = encryptedTextInput.value;
-
-  for (let i = 0; i < textString.length; i++) {
-    encryption = textString[i].charCodeAt(0) - Number(encryptionString);
-    if (encryption < 32) {
-      for (let i = 0; encryption < 32; i++) {
-        encryption += 95;
-      }
-    }
-    encryptedText += String.fromCharCode(encryption);
+  if (addEncryption) {
+    encryptedTextInput.value = encryptedText;
+  } else if (!addEncryption) {
+    plainTextInput.value = encryptedText;
   }
-  plainTextInput.value = encryptedText;
   clearMemory();
 };
 
@@ -64,4 +64,7 @@ encryptionBtn.onclick = () => {
   addEncryption = true;
   encrypt();
 };
-decryptionBtn.onclick = () => decrypt();
+decryptionBtn.onclick = () => {
+  addEncryption = false;
+  encrypt();
+};
