@@ -7,6 +7,7 @@ let decryptionKey = document.getElementById("decryption-key");
 let encryptedTextInput = document.getElementById("encrypted-text");
 let encryptedText = "";
 let encryption = 0;
+let addEncryption;
 
 const clear = () => {
   encryptionKey.value = "";
@@ -59,5 +60,8 @@ const decrypt = () => {
 };
 
 clearBtn.onclick = () => clear();
-encryptionBtn.onclick = () => encrypt();
+encryptionBtn.onclick = () => {
+  addEncryption = true;
+  encrypt();
+};
 decryptionBtn.onclick = () => decrypt();
