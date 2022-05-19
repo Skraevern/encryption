@@ -1,6 +1,7 @@
 body {
   background-color: rgb(27, 27, 27);
   color: rgb(200, 200, 200);
+  padding-left: 20px;
 }
 .input-num {
   width: 100px;
